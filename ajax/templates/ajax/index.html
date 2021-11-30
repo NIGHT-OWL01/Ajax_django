@@ -1,0 +1,33 @@
+<html>
+    <body>
+        page home!
+        <button id='btn'>Fetch Data</button>
+        <ul id='list'>
+            <li>li</li>
+        </ul>
+    </body>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.addEventListener('click', getData)
+        
+        function getData(){
+            let list=document.getElementById('list')
+            let xhr = new XMLHttpRequest
+            xhr.open('GET', 'json',true)
+            xhr.onload = function(){
+                let data=JSON.parse(this.responseText);
+                console.log(data['h1'])
+
+                str="";
+                for(key in data){
+                    str+=`<li> ${key} : ${data[key]}</li>`;
+                }
+
+                list.innerHTML =str;
+            }
+            xhr.send();
+        }
+
+        
+    </script>
+</html>
